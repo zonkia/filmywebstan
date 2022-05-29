@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+from dj_database_url import parse as dburl
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+ed(zvm0+=0h@p0y05d*c4i*q^8x0#1$ll5t8n03v9qmia0ent'
+SECRET_KEY = config("SECRET_KEY")
+DEBUG = config("DEBUG", default=False, cast=bool)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+#ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["filmywebstan.herokuapp.com", "localhost:8000"]
+# git.heroku.com/filmywebstan.git
 
 
 # Application definition
@@ -73,6 +77,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'filmy.wsgi.application'
 
+default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+DATABASES = {'default': config(
+    'DATABASE_URL', default=default_dburl, cast=dburl,)}
+
+
+"""
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -83,6 +93,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
 
 
 # Password validation
@@ -122,7 +133,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ["moje_static"]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "moje_static")
+
+#STATICFILES_DIRS = ["moje_static"]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'moje_media'

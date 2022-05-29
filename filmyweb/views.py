@@ -20,6 +20,7 @@ def wszystkie_filmy(request):
 def nowy_film(request):
     form_film = FilmForm(request.POST or None, request.FILES or None)
     form_dodatkowe = DodatkoweInfoForm(request.POST or None)
+    form_ocena = OcenaForm(request.POST or None)
 
     if all((form_film.is_valid(), form_dodatkowe.is_valid())):
         # commit=False blokuje wysyłkę do bazy
@@ -31,7 +32,8 @@ def nowy_film(request):
         return redirect(wszystkie_filmy)
 
     return render(request, "film_form.html", {"form": form_film,
-                                              "form_dodatkowe": form_dodatkowe,
+                                              "form_dodatkowe": form_dodatkowe, "form_ocena":
+                                              form_ocena,
                                               "nowy": True})
 
 
