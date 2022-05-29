@@ -47,12 +47,16 @@
     </div>
 </div>
 
+<a href="{% url 'wszystkie_ahref' %}">Wróć do filmów</a>
+<br>
 
 Oceny:
 {% for ocena in oceny %}
 <h4>{{ ocena.gwiazdki }}</h4>
 <p>{{ ocena.recenzja }}</p>
 {% endfor %}
+
+
 
 
 
