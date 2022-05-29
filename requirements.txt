@@ -9,3 +9,4 @@ static3==0.7.0
 pytz==2019.3
 gunicorn
 psycopg2
+whitenoise==6.1.0
