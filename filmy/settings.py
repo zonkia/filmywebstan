@@ -28,7 +28,7 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 
 
 #ALLOWED_HOSTS = ["127.0.0.1"]
-ALLOWED_HOSTS = ["filmywebstan.herokuapp.com", "localhost:8000"]
+ALLOWED_HOSTS = ["filmywebstan.herokuapp.com", "127.0.0.1"]
 # git.heroku.com/filmywebstan.git
 
 

@@ -26,6 +26,10 @@
 
 {% if filmy|length == 0 %}
 <h2>Brak filmow</h2>
+{% if user.is_authenticated %}
+<a href="{% url 'dodaj_film_ahref' %}">Nowy film <i class="fa-solid fa-circle-plus"></i></a>
+<br>
+{% endif %}
 {% else %}
 <!-- <h2>Ilosc filmow w bazie: {{ filmy|length }}</h2> -->
 {% if user.is_authenticated %}
