@@ -1,0 +1,71 @@
+{% extends 'glowny.html' %}
+
+{% block tytul %} Lista filmów {% endblock %}
+
+{% block strona %}
+
+<div class="jumbotron">
+    {% if user.is_authenticated %}
+    <h1 class="display-4">Witaj {{ user.username }}</h1>
+    <p class="lead">
+        <a class="btn btn-success btn-sm" href="{% url 'logout_ahref' %}" role="button">Wyloguj <i
+                class="fa-solid fa-right-from-bracket"></i></a>
+    </p>
+
+    {% else %}
+    <p class="lead">
+        <a class="btn btn-primary btn-sm" href="{% url 'login_ahref' %}" role="button">Zaloguj <i
+                class="fa-solid fa-right-to-bracket"></i></a>
+    </p>
+    {% endif %}
+</div>
+
+
+
+<hr>
+
+{% if filmy|length == 0 %}
+<h2>Brak filmow</h2>
+{% else %}
+<!-- <h2>Ilosc filmow w bazie: {{ filmy|length }}</h2> -->
+{% if user.is_authenticated %}
+<a href="{% url 'dodaj_film_ahref' %}">Nowy film <i class="fa-solid fa-circle-plus"></i></a>
+<br>
+{% endif %}
+
+
+
+<!-- film.tytul jest obiektem z models. Podajac tylko tytul zaciągnie def __str__()-->
+{% for film in filmy %}
+<br>
+<div class="card" style="width: 40rem;">
+    <div class="card-body">
+        <img src="/media/{{ film.plakat }}" , class="film-plakat">
+        <div class="row">
+            <div class="col-9">
+                <h5 class="card-title">{{ film }}</h5>
+            </div>
+            <div class="col-3">
+                {% if user.is_authenticated %}
+                <a href="{% url 'edytuj_film_ahref' film.id%}" class="btn btn-primary"><i
+                        class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{% url 'usun_film_ahref' film.id%}" class="btn btn-primary"><i
+                        class="fa-solid fa-trash"></i></a>
+
+                {% endif %}
+            </div>
+            <div class="row">
+                <p class="card-text">{{ film.opis }}</p>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}
