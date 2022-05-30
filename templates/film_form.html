@@ -6,6 +6,7 @@
 {% block strona %}
 
 
+
 <div class="card" style="width: 30rem; float: left; margin-right: 1rem;">
     <div class="card-body">
         {% if nowy %}
@@ -47,17 +48,14 @@
     </div>
 </div>
 
+
 <a href="{% url 'wszystkie_ahref' %}">Wróć do filmów</a>
 <br>
-
 Oceny:
 {% for ocena in oceny %}
 <h4>{{ ocena.gwiazdki }}</h4>
 <p>{{ ocena.recenzja }}</p>
 {% endfor %}
-
-
-
 
 
 {% endblock %}

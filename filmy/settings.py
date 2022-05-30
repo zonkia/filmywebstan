@@ -15,6 +15,7 @@ from decouple import config
 from dj_database_url import parse as dburl
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -55,8 +56,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'filmy.urls'
@@ -135,10 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, "moje_static")
-
-#STATICFILES_DIRS = ["moje_static"]
+STATICFILES_DIRS = ["moje_static"]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'moje_media'
